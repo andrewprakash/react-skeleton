@@ -27,6 +27,7 @@ var Application = React.createClass({
         viewstore.removeListener('change_view', self.handleViewChange)
     },
     
+    
     handleViewChange(view){
         var self = this;
         self.setState({
