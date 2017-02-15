@@ -4,11 +4,11 @@ module.exports = {
     entry: ['babel-polyfill','./src/main.js', './src/styles/style.js'],
     output: {
         path: './dist',
-        filename: 'index.js',
+        filename: 'js/index.js',
     },
     plugins:[
         new ExtractTextPlugin({
-            filename: 'index.css',
+            filename: 'css/index.css',
             allChunks: true
         })
         ],
