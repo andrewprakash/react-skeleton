@@ -9514,7 +9514,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * 
- * All View Components
+ * All View Components declarations added here
+ * so that it can be dynamically rendered to the parent app component
  * 
 **/
 __webpack_require__(147);
@@ -13317,11 +13318,13 @@ function goNextView(action) {
             _store.emit("change_view", viewFlow[action.data]);
         }
     } else {
-        console.error("View requested could not be found please check the view you requested");
+        console.error("View requested could not be found");
     }
 }
 
 var currentView = null;
+
+// Add all view components below
 
 var viewFlow = {
     home: {
@@ -13331,7 +13334,6 @@ var viewFlow = {
 };
 
 var _store = new ViewStore();
-window.axios = _axios2.default;
 _dispatcher2.default.register(_store.handleActions.bind(_store));
 module.exports = _store;
 

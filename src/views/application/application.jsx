@@ -4,7 +4,8 @@ import Header from "./header.jsx";
 
 /**
  * 
- * All View Components
+ * All View Components declarations added here
+ * so that it can be dynamically rendered to the parent app component
  * 
 **/
 require('../home/home.jsx')

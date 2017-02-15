@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
-import dispatcher from '../flux/dispatcher'
-import axios from 'axios'
+import dispatcher from '../flux/dispatcher';
+import axios from 'axios';
 
 class ViewStore extends EventEmitter{
     constructor(){
@@ -34,11 +34,13 @@ function goNextView(action){
             _store.emit("change_view", viewFlow[action.data])
         }
     }else{
-        console.error("View requested could not be found please check the view you requested")
+        console.error("View requested could not be found")
     }
 }
 
 var currentView = null;
+
+// Add all view components below
 
 var viewFlow = {
     home:{
@@ -48,6 +50,5 @@ var viewFlow = {
 }
 
 var _store = new ViewStore();
-window.axios = axios
 dispatcher.register(_store.handleActions.bind(_store))
 module.exports = _store;
