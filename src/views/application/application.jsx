@@ -14,7 +14,6 @@ require('../contact/contact.jsx')
 
 var Application = React.createClass({
     getInitialState(){
-      
       return({
           view: viewstore.getInitialView()
       })
@@ -51,7 +50,9 @@ var Application = React.createClass({
         return(
             <div>
                 <Header />
-                {view}
+                <div>
+                    {view}
+                </div>
             </div>
         )
     }

@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom'
 import Application from "./views/application/application.jsx"; 
 
 
-class App extends React.Component {
-    render() {
-        return <Application />;
-    }
+window.onload = function(){
+    
+    ReactDOM.render(<Application/>, document.getElementById("app"));
+    
 }
-
-ReactDOM.render(<App/>, document.getElementById("app"));
