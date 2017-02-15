@@ -15,6 +15,7 @@ var Application = React.createClass({
           view: viewstore.getInitialView()
       })
     },
+    
     componentDidMount(){
         var self = this;
         viewstore.on('change_view', self.handleViewChange)

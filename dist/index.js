@@ -13317,7 +13317,7 @@ function goNextView(action) {
             _store.emit("change_view", viewFlow[action.data]);
         }
     } else {
-        console.error("View requested could not be found");
+        console.error("View requested could not be found please check the view you requested");
     }
 }
 
