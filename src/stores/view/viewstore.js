@@ -28,11 +28,8 @@ class ViewStore extends EventEmitter{
 
 function goNextView(action){
     if(viewFlow[action.data].module !== currentView.module){
-        console.log("new view being set")
         currentView = viewFlow[action.data]
         _store.emit("change_view", viewFlow[action.data])
-    }else{
-        console.log("you are already viewing it")
     }
 }
 
