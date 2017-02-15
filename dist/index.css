@@ -1,5 +1,16 @@
 h1 {
   font-size: 50px;
 }
+.header-list-item {
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px 15px;
+  font-size: 19px;
+  font-family: sans-serif;
+}
+.header-list-item:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=index.css.map*/

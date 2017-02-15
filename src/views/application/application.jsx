@@ -1,33 +1,57 @@
 import React from 'react';
-import ApplicationStore from '../../stores/application/applicationstore'
-import dispatcher from '../../stores/flux/dispatcher'
+import viewstore from '../../stores/view/viewstore'
+import Header from "./header.jsx"; 
+
+/**
+ * 
+ * All View Components
+ * 
+**/
+require('../home/home.jsx')
+require('../about/about.jsx')
+require('../contact/contact.jsx')
 
 
 var Application = React.createClass({
     getInitialState(){
-        return({
-            value: ApplicationStore.checkStore()
-        })
+      
+      return({
+          view: viewstore.getInitialView()
+      })
     },
     componentDidMount(){
-        ApplicationStore.on('changed', this.changeRecieved) 
+        var self = this;
+        viewstore.on('change_view', self.handleViewChange)
     },
-    changeRecieved(data){
-        console.log("data recieved from emit", data)
+    componentWillUnmount(){
+        var self = this;
+        viewstore.removeListener('change_view', self.handleViewChange)
     },
-    buttonClickedEvent(e){
-        dispatcher.dispatch({
-            type: "CLICK_BUTTON",
-            data: {
-                value: "hello world"
-            }
+    
+    handleViewChange(view){
+        var self = this;
+        self.setState({
+            view: view
         })
     },
+    
+    buildView(viewInfo){
+        var newView = require('../' + viewInfo.module);
+        return React.createElement(newView, viewInfo)
+    },
+    
     render(){
+        var self = this;
+        var view = null;
+        
+        if(self.state.view){
+            view = self.buildView(self.state.view)
+        }
         
         return(
             <div>
-                <button onClick={this.buttonClickedEvent}>Button</button>
+                <Header />
+                {view}
             </div>
         )
     }
