@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import Application from "./views/application.jsx"; 
+import Application from "./views/application/application.jsx"; 
 
 
 class App extends React.Component {

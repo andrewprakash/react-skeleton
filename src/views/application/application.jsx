@@ -1,6 +1,6 @@
 import React from 'react';
-import ApplicationStore from '../stores/application/applicationstore'
-import dispatcher from '../stores/flux/dispatcher'
+import ApplicationStore from '../../stores/application/applicationstore'
+import dispatcher from '../../stores/flux/dispatcher'
 
 
 var Application = React.createClass({
