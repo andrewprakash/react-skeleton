@@ -4,15 +4,15 @@
 ## Instructions
 Run the following commands to start developing
 
-### Will Install the dependencies
+### To Install the dependencies
 ```
 npm install
 ```
-### Will compile all js, jsx and less and have watch running in background
+### To compile all js, jsx and less and have watch running in background
 ```
 npm run dev
 ```
-### Will compile and minify all js, jsx and less for production 
+### To compile and minify all js, jsx and less for production 
 ```
 npm run prod
 ```
