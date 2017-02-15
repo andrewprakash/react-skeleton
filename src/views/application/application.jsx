@@ -8,8 +8,7 @@ import Header from "./header.jsx";
  * 
 **/
 require('../home/home.jsx')
-require('../about/about.jsx')
-require('../contact/contact.jsx')
+
 var Application = React.createClass({
     getInitialState(){
       return({
