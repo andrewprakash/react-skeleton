@@ -10173,13 +10173,21 @@ var _react = __webpack_require__(93);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _header = __webpack_require__(151);
+
+var _header2 = _interopRequireDefault(_header);
+
 var _viewstore = __webpack_require__(231);
 
 var _viewstore2 = _interopRequireDefault(_viewstore);
 
-var _header = __webpack_require__(151);
+var _dbstore = __webpack_require__(519);
 
-var _header2 = _interopRequireDefault(_header);
+var _dbstore2 = _interopRequireDefault(_dbstore);
+
+var _dispatcher = __webpack_require__(149);
+
+var _dispatcher2 = _interopRequireDefault(_dispatcher);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10195,16 +10203,28 @@ var Application = _react2.default.createClass({
     displayName: 'Application',
     getInitialState: function getInitialState() {
         return {
-            view: _viewstore2.default.getInitialView()
+            view: null
         };
     },
     componentDidMount: function componentDidMount() {
         var self = this;
         _viewstore2.default.on('change_view', self.handleViewChange);
+        _dbstore2.default.on('application_db_ready', self.getInitView);
+        _dispatcher2.default.dispatch({
+            type: "SETUP_DB",
+            data: {}
+        });
     },
     componentWillUnmount: function componentWillUnmount() {
         var self = this;
         _viewstore2.default.removeListener('change_view', self.handleViewChange);
+        _dbstore2.default.removeListener('application_db_ready', self.getInitView);
+    },
+    getInitView: function getInitView() {
+        var self = this;
+        self.setState({
+            view: _viewstore2.default.getInitialView()
+        });
     },
     handleViewChange: function handleViewChange(view) {
         var self = this;
@@ -32544,6 +32564,133 @@ __webpack_require__(212);
 __webpack_require__(210);
 module.exports = __webpack_require__(211);
 
+
+/***/ }),
+/* 519 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);if (staticProps) defineProperties(Constructor, staticProps);return Constructor;
+    };
+}();
+
+var _events = __webpack_require__(516);
+
+var _dispatcher = __webpack_require__(149);
+
+var _dispatcher2 = _interopRequireDefault(_dispatcher);
+
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
+
+function _possibleConstructorReturn(self, call) {
+    if (!self) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
+    }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+}
+
+var _db = null;
+var _dbVersion = 28;
+
+var DBStores = [{
+    Name: "Car",
+    Options: { autoIncrement: true }
+}];
+
+var DBStore = function (_EventEmitter) {
+    _inherits(DBStore, _EventEmitter);
+
+    function DBStore() {
+        _classCallCheck(this, DBStore);
+
+        return _possibleConstructorReturn(this, (DBStore.__proto__ || Object.getPrototypeOf(DBStore)).call(this));
+    }
+
+    _createClass(DBStore, [{
+        key: 'handleActions',
+        value: function handleActions(action) {
+            switch (action.type) {
+                case 'SETUP_DB':
+                    openDB(action);
+                    break;
+            }
+        }
+    }]);
+
+    return DBStore;
+}(_events.EventEmitter);
+
+function openDB() {
+    var openRequest = indexedDB.open("REACT", _dbVersion);
+    openRequest.onupgradeneeded = upgradeNeeded;
+    openRequest.onsuccess = success;
+    openRequest.onerror = error;
+}
+
+function upgradeNeeded(e) {
+    var newDb = e.target.result;
+    createStores(newDb);
+}
+
+function success(e) {
+    _db = e.target.result;
+    console.log("New DB Created", _db);
+    _store.emit("application_db_ready");
+}
+
+function error(e) {
+    console.log("there was an error");
+}
+
+DBStore.prototype.getObjectStore = function (objectStore) {
+    try {
+        return Promise.resolve(_db.transaction([objectStore], "readwrite")).then(function (transaction) {
+            return transaction;
+        }).then(function (transaction) {
+            return Promise.resolve(transaction.objectStore(objectStore));
+        });
+    } catch (e) {
+        console.log("there was an error retrieving the requested db", e);
+    }
+};
+
+function createStores(newDb) {
+    for (var i = 0; i < DBStores.length; i++) {
+        var options = {};
+        if (!newDb.objectStoreNames.contains(DBStores[i].Name)) {
+            options = DBStores[i].Options;
+            newDb.createObjectStore(DBStores[i].Name, options);
+        }
+    }
+}
+
+var _store = new DBStore();
+window.dbstore = _store;
+_dispatcher2.default.register(_store.handleActions.bind(_store));
+module.exports = _store;
 
 /***/ })
 /******/ ]);
