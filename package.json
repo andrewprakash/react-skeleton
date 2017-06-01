@@ -20,7 +20,7 @@
     "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "less-loader": "^2.2.3",
     "style-loader": "^0.13.1",
-    "webpack": "^2.2.1"
+    "webpack": "2.2.1"
   },
   "dependencies": {
     "axios": "^0.15.3",
