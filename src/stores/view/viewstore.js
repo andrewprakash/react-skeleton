@@ -45,8 +45,12 @@ var currentView = null;
 var viewFlow = {
     home:{
         module: 'home/home.jsx',
-        hash: 'home'
+        path: ''
     },
+    about:{
+        module: 'about/about.jsx',
+        path:'about'
+    }
 }
 
 var _store = new ViewStore();

@@ -3,6 +3,8 @@ import Header from "./header.jsx";
 import viewstore from '../../stores/view/viewstore'
 import dbstore from '../../stores/db/dbstore'
 import dispatcher from '../../stores/flux/dispatcher'
+import {BrowserRouter} from 'react-router-dom'
+import {Route} from 'react-router'
 
 /**
  * 
@@ -11,6 +13,7 @@ import dispatcher from '../../stores/flux/dispatcher'
  * 
 **/
 require('../home/home.jsx')
+require('../about/about.jsx')
 
 var Application = React.createClass({
     getInitialState(){
@@ -50,23 +53,25 @@ var Application = React.createClass({
     
     buildView(viewInfo){
         var newView = require('../' + viewInfo.module);
-        return React.createElement(newView, viewInfo)
+        return newView
     },
     
     render(){
         var self = this;
         var view = null;
+        var path = null;
         
         if(self.state.view){
             view = self.buildView(self.state.view)
+            path = self.state.view.path
         }
         
         return(
             <div>
                 <Header />
-                <div>
-                    {view}
-                </div>
+                <BrowserRouter>
+                    <Route path={path} component={view}/>
+                </BrowserRouter>
             </div>
         )
     }
