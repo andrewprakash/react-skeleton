@@ -18,7 +18,7 @@ class Header extends React.Component{
                         <Link to='/about'>About</Link>
                     </li>
                     <li className="header-list-item">
-                        <Link to='/cars'>Cars</Link>
+                        <Link to='/listings'>Listings</Link>
                     </li>
                 </ul>
             </div>

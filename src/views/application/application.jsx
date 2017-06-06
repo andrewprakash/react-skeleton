@@ -1,6 +1,4 @@
 import React from 'react';
-import dbstore from '../../stores/db/dbstore'
-import dispatcher from '../../stores/flux/dispatcher'
 import {Route, Switch} from 'react-router-dom'
 
 /**
@@ -14,11 +12,10 @@ import {Route, Switch} from 'react-router-dom'
 import Header from "./header.jsx"; 
 import Home from "../home/home.jsx";
 import About from "../about/about.jsx";
-import Cars from "../cars/cars.jsx";
-import CarsDetails from "../cars/carsdetail.jsx"
+import Listings from "../listings/listings.jsx"
+import Listing from "../listings/listing.jsx"
 
 class Application extends React.Component{
-    
     constructor(props){
         super(props)
         this.state = {
@@ -40,8 +37,8 @@ class Application extends React.Component{
             <div>
                 <Header/>
                 <Switch>
-                    <Route path='/cars/:id' component={CarsDetails}/>
-                    <Route path='/cars' component={Cars} />
+                    <Route path='/listings/:id' component={Listing}/>
+                    <Route path='/listings' component={Listings} />
                     <Route path='/about' component={About} />
                     <Route path='/' component={Home} />
                 </Switch>
