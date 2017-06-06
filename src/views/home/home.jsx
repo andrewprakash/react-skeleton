@@ -1,12 +1,13 @@
 import React from 'react';
 
-var Home = React.createClass({
+
+class Home extends React.Component{
     componentDidMount(){
         
-    },
+    }
     componentWillUnmount(){
         
-    },
+    }
     render(){
         return(
             <div id="about">
@@ -14,6 +15,6 @@ var Home = React.createClass({
             </div>
         )
     }
-})
+}
 
 module.exports = Home;

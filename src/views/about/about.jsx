@@ -1,12 +1,19 @@
 import React from 'react';
 
-var About = React.createClass({
+class About extends React.Component{
+    
+    constructor(props){
+        super(props)
+    }
+    
     componentDidMount(){
-        
-    },
+        console.log("component did mount")
+    }
+    
     componentWillUnmount(){
         
-    },
+    }
+    
     render(){
         return(
             <div id="about">
@@ -14,6 +21,6 @@ var About = React.createClass({
             </div>
         )
     }
-})
+}
 
 module.exports = About;
