@@ -3,7 +3,7 @@ import dispatcher from '../flux/dispatcher';
 import axios from "axios"
 
 var data = {
-    listing: null
+    listings: []
 }
 
 class ListingStore extends EventEmitter{
@@ -13,27 +13,27 @@ class ListingStore extends EventEmitter{
     
     handleActions(action){
         switch(action.type){
-            
+            case 'GET_LISTING':
+                getListing(action)
+                break;
         }
     }
-    
-}
-
-ListingStore.prototype.getListings= function(){
-    axios.get("https://hfh-api-andrew-prakash.c9users.io/v1/listings")
-    .then(function(r){
-        console.log("response", r.data)
-    })
-    
-    return data
 }
 
 ListingStore.prototype.getListing = function(id){
-    for(var i = 0; i < data.length; i++){
-        if(data[i].id == id){
-            return data[i];
+    for(var i = 0; i < data.listings.length; i++){
+        if(data.listings[i].id == id){
+            return data.listings[i];
         }
     }
+}
+
+function getListing(action){
+    axios.get("https://hfh-api-andrew-prakash.c9users.io/v1/listings")
+    .then(function(r){
+        data.listings = r.data;
+        _store.emit("listings", r.data)
+    })
 }
 
 var _store = new ListingStore();

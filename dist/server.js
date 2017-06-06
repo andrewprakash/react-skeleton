@@ -6,7 +6,6 @@ const path = require("path")
 app.use(express.static(__dirname + "/"))
 
 app.get("*", function(req, res){
-    console.log("directory name", __dirname)
     res.sendFile(path.resolve(__dirname, "./", "index.html"))
 })
 

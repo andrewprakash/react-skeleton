@@ -40,7 +40,6 @@ function upgradeNeeded(e){
 
 function success(e){
     _db = e.target.result
-    console.log("New DB Created", _db)
     _store.emit("application_db_ready")
 }
 
