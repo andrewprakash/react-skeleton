@@ -37269,16 +37269,9 @@ function _inherits(subClass, superClass) {
     }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
-var data = [{
-    id: 1,
-    name: "Toyota"
-}, {
-    id: 2,
-    name: "Mazda"
-}, {
-    id: 3,
-    name: "Nissan"
-}];
+var data = {
+    listing: null
+};
 
 var ListingStore = function (_EventEmitter) {
     _inherits(ListingStore, _EventEmitter);
@@ -37300,8 +37293,8 @@ var ListingStore = function (_EventEmitter) {
 }(_events.EventEmitter);
 
 ListingStore.prototype.getListings = function () {
-    _axios2.default.get("http://104.236.253.245:3000/v1/listings").then(function (r) {
-        console.log("response", r);
+    _axios2.default.get("https://hfh-api-andrew-prakash.c9users.io/v1/listings").then(function (r) {
+        console.log("response", r.data);
     });
 
     return data;
@@ -37371,16 +37364,12 @@ var Listings = function (_React$Component) {
 
             var listingList = self.state.data.map(function (listing) {
                 return _react2.default.createElement(
-                    'div',
-                    null,
-                    _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        {
-                            to: '/listings/' + listing.id,
-                            key: listing.id
-                        },
-                        listing.name
-                    )
+                    _reactRouterDom.Link,
+                    {
+                        to: '/listings/' + listing.id,
+                        key: listing.id
+                    },
+                    listing.name
                 );
             });
 

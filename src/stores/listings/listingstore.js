@@ -2,20 +2,9 @@ import { EventEmitter } from 'events';
 import dispatcher from '../flux/dispatcher';
 import axios from "axios"
 
-var data = [
-            {
-                id: 1,
-                name: "Toyota"
-            },
-            {
-                id: 2,
-                name: "Mazda"
-            },
-            {
-                id: 3,
-                name: "Nissan"
-            }
-        ] 
+var data = {
+    listing: null
+}
 
 class ListingStore extends EventEmitter{
     constructor(){
@@ -31,9 +20,9 @@ class ListingStore extends EventEmitter{
 }
 
 ListingStore.prototype.getListings= function(){
-    axios.get("http://104.236.253.245:3000/v1/listings")
+    axios.get("https://hfh-api-andrew-prakash.c9users.io/v1/listings")
     .then(function(r){
-        console.log("response", r)
+        console.log("response", r.data)
     })
     
     return data

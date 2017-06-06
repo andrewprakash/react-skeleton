@@ -19,14 +19,12 @@ class Listings extends React.Component{
         
         var listingList = self.state.data.map((listing) =>{
             return (
-                    <div>
-                        <Link 
-                            to={'/listings/' + listing.id}
-                            key={listing.id}
-                        >
-                        {listing.name}
-                        </Link>
-                    </div>
+                    <Link 
+                        to={'/listings/' + listing.id}
+                        key={listing.id}
+                    >
+                    {listing.name}
+                    </Link>
                 )
         })
         
