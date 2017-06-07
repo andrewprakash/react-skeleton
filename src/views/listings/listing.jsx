@@ -15,7 +15,7 @@ class Listing extends React.Component{
         
         return(
             <div>
-                {self.state.listing.name}
+                Hello world
             </div>
         )
     }

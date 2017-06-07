@@ -38,7 +38,7 @@ class Listings extends React.Component{
         
         return(
             <div>
-                {listingList}
+                Hello from listings
             </div>
         )
     }
