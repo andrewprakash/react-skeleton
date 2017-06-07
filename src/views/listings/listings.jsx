@@ -1,8 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import dispatcher from '../../stores/flux/dispatcher'
 
-import listingstore from '../../stores/listings/listingstore'
 
 class Listings extends React.Component{
     
@@ -14,19 +12,10 @@ class Listings extends React.Component{
     }
 
     componentDidMount(){
-        dispatcher.dispatch({
-            type: "GET_LISTING",
-            data: {}
-        })
     }
     
     componentWillMount(){
         var self = this;
-        listingstore.on("listings", function(data){
-            self.setState({
-                listings: data
-            })
-        })
     }
     
     render(){

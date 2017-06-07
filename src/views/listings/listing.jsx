@@ -1,5 +1,4 @@
 import React from 'react';
-import listingstore from '../../stores/listings/listingstore'
 
 
 class Listing extends React.Component{
@@ -9,9 +8,6 @@ class Listing extends React.Component{
 
     componentWillMount(){
         var self = this;
-        self.setState({
-            listing: listingstore.getListing(self.props.match.params.id)
-        })
     }
 
     render(){
