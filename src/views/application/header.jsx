@@ -1,26 +1,34 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
+import {Menu, Segment} from 'semantic-ui-react'
 
 class Header extends React.Component{
-    
+    constructor(props){
+        super(props)
+        let currentLocation = window.location.pathname.split("/")[1]
+        this.state = {
+            activeItem: currentLocation
+        }
+        this.handleItemClick = this.handleItemClick.bind(this)
+    }
+
+    componentWillMount(){
+        console.log("props", this.props)
+    }    
+
+    handleItemClick(e, { name }){
+        this.setState({ activeItem: name })
+    }
     
     render(){
         var self = this;
-        
+        const { activeItem } = this.state
         return(
-            <div id="header">
-                <ul className="header-list">
-                    <li className="header-list-item">
-                        <Link to='/'>Home</Link>
-                    </li>
-                    <li className="header-list-item">
-                        <Link to='/about'>About</Link>
-                    </li>
-                    <li className="header-list-item">
-                        <Link to='/listings'>Listings</Link>
-                    </li>
-                </ul>
-            </div>
+            <Menu stackable>
+                <Menu.Item as={Link} to="/" name="home" active={activeItem === 'home'} onClick={this.handleItemClick}/>
+                <Menu.Item as={Link} to="/listings" name="listings" active={activeItem === 'listings'} onClick={this.handleItemClick}/>
+                <Menu.Item as={Link} to="/about" name="about" active={activeItem === 'about'} onClick={this.handleItemClick}/>
+            </Menu>
         )
     }
 }
