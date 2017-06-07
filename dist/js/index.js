@@ -15915,53 +15915,19 @@ define(String.prototype, "padRight", "".padEnd);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(70)))
 
 /***/ }),
-/* 246 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var counterReducer = function counterReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    var action = arguments[1];
-
-    return state;
-};
-
-module.exports = counterReducer;
-
-/***/ }),
-/* 247 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var tweetsReducer = function tweetsReducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var action = arguments[1];
-
-    return state;
-};
-
-module.exports = tweetsReducer;
-
-/***/ }),
+/* 246 */,
+/* 247 */,
 /* 248 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _redux = __webpack_require__(239);
-
-var _counterReducer = __webpack_require__(246);
-
-var _counterReducer2 = _interopRequireDefault(_counterReducer);
-
-var _tweetsReducer = __webpack_require__(247);
-
-var _tweetsReducer2 = _interopRequireDefault(_tweetsReducer);
 
 var _reduxLogger = __webpack_require__(602);
 
@@ -15969,20 +15935,17 @@ var _reduxThunk = __webpack_require__(603);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
+var _reducers = __webpack_require__(620);
 
-var reducers = (0, _redux.combineReducers)({
-    counter: _counterReducer2.default,
-    tweets: _tweetsReducer2.default
-});
+var _reducers2 = _interopRequireDefault(_reducers);
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, (0, _reduxLogger.createLogger)());
 
-var store = (0, _redux.createStore)(reducers, middleware);
-
-module.exports = store;
+exports.default = (0, _redux.createStore)(_reducers2.default, middleware);
 
 /***/ }),
 /* 249 */
@@ -16226,13 +16189,9 @@ module.exports = Header;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _dec, _class;
-
 var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(217);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16242,11 +16201,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Home = (_dec = (0, _reactRedux.connect)(function (store) {
-    return {
-        foo: 1
-    };
-}), _dec(_class = function (_React$Component) {
+var Home = function (_React$Component) {
     _inherits(Home, _React$Component);
 
     function Home() {
@@ -16256,25 +16211,24 @@ var Home = (_dec = (0, _reactRedux.connect)(function (store) {
     }
 
     _createClass(Home, [{
-        key: 'componentDidMount',
+        key: "componentDidMount",
         value: function componentDidMount() {}
     }, {
-        key: 'componentWillUnmount',
+        key: "componentWillUnmount",
         value: function componentWillUnmount() {}
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                { id: 'about' },
-                'hello from home page'
+                "div",
+                { id: "about" },
+                "hello from home page"
             );
         }
     }]);
 
     return Home;
-}(_react2.default.Component)) || _class);
-
+}(_react2.default.Component);
 
 module.exports = Home;
 
@@ -16340,11 +16294,17 @@ module.exports = Listing;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _dec, _class;
+
 var _react = __webpack_require__(12);
 
 var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(96);
+
+var _reactRedux = __webpack_require__(217);
+
+var _listingsActions = __webpack_require__(622);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16354,7 +16314,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Listings = function (_React$Component) {
+var Listings = (_dec = (0, _reactRedux.connect)(function (store) {
+    return {
+        listing: store.listing.listings
+    };
+}), _dec(_class = function (_React$Component) {
     _inherits(Listings, _React$Component);
 
     function Listings(props) {
@@ -16362,15 +16326,21 @@ var Listings = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Listings.__proto__ || Object.getPrototypeOf(Listings)).call(this, props));
 
+        var self = _this;
         _this.state = {
-            listings: null
+            listings: self.props.listing
         };
         return _this;
     }
 
     _createClass(Listings, [{
         key: 'componentDidMount',
-        value: function componentDidMount() {}
+        value: function componentDidMount() {
+            var self = this;
+            self.setState({
+                listings: this.props.dispatch((0, _listingsActions.fetchListings)())
+            });
+        }
     }, {
         key: 'componentWillMount',
         value: function componentWillMount() {
@@ -16380,20 +16350,21 @@ var Listings = function (_React$Component) {
         key: 'render',
         value: function render() {
             var self = this;
-
+            console.log("the listing", self.state);
             var listingList = null;
-            if (self.state.listings) {
-                listingList = self.state.listings.map(function (listing) {
-                    return _react2.default.createElement(
-                        _reactRouterDom.Link,
-                        {
-                            to: '/listings/' + listing.id,
-                            key: listing.id
-                        },
-                        listing.name
-                    );
-                });
-            }
+            // if(self.state.listings){
+            //     listingList = self.state.listings.map((listing) =>{
+            //         return (
+            //                 <Link 
+            //                     to={'/listings/' + listing.id}
+            //                     key={listing.id}
+            //                 >
+            //                 {listing.name}
+            //                 </Link>
+            //             )
+            //     })
+            // }
+
 
             return _react2.default.createElement(
                 'div',
@@ -16404,7 +16375,8 @@ var Listings = function (_React$Component) {
     }]);
 
     return Listings;
-}(_react2.default.Component);
+}(_react2.default.Component)) || _class);
+
 
 module.exports = Listings;
 
@@ -40513,6 +40485,80 @@ __webpack_require__(245);
 __webpack_require__(243);
 module.exports = __webpack_require__(244);
 
+
+/***/ }),
+/* 620 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _redux = __webpack_require__(239);
+
+var _listingsReducer = __webpack_require__(621);
+
+var _listingsReducer2 = _interopRequireDefault(_listingsReducer);
+
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj };
+}
+
+exports.default = (0, _redux.combineReducers)({
+    listing: _listingsReducer2.default
+});
+
+/***/ }),
+/* 621 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = reducer;
+function reducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+        listings: {
+            name: null,
+            description: null
+        }
+    };
+    var action = arguments[1];
+
+    switch (action.type) {
+        case "FETCH_LISTINGS":
+            return Object.assign({}, state.listings, action.payload);
+        default:
+            return state;
+    }
+}
+
+/***/ }),
+/* 622 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.fetchListings = fetchListings;
+function fetchListings() {
+    return {
+        type: "FETCH_LISTINGS",
+        payload: {
+            name: "Washing",
+            description: "Need to wash the car"
+        }
+    };
+}
 
 /***/ })
 /******/ ]);
